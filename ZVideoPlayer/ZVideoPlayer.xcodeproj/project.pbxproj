@@ -388,6 +388,7 @@
 				ABE1F2BD1E14B243004A6E16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

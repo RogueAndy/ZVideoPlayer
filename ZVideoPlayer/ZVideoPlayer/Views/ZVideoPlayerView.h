@@ -10,6 +10,11 @@
 
 @interface ZVideoPlayerView : ZBaseView
 
+///**
+// 点击放大屏幕或者缩小屏幕时候的回调函数，当然，fullRect 代表满屏后的大小(可为nil), scaleRect 代表缩小后的屏幕大小(可为nil)
+// */
+//@property (nonatomic, strong) void (^fullOrScale)(void);
+
 /**
  播放本地视频
 

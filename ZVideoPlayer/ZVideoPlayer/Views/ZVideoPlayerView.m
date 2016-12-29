@@ -37,9 +37,14 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 @property (nonatomic, strong) UIButton *stopButton;
 
 /**
- 展开全屏按钮
+ 展开或者缩小全屏按钮
  */
 @property (nonatomic, strong) UIButton *screenButton;
+
+/**
+ 判断是否是全屏的状态
+ */
+@property (nonatomic, assign) BOOL isFullScreen;
 
 /**
  获取视频信息，当前时间以及总时间之类的信息
@@ -90,6 +95,11 @@ static CGFloat zvideo_timer_move_distance = 0.5;
  计算视频的总时间
  */
 @property (nonatomic) CGFloat videoTotalTime;
+
+/**
+ 记录 view 上次的 frame
+ */
+@property (nonatomic) CGRect beforeFrame;
 
 @end
 
@@ -273,7 +283,34 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
 - (void)fullScreenAction:(UIButton *)sender {
 
-    NSLog(@"放大");
+    if(self.isFullScreen) {
+    
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             [self setTransform:CGAffineTransformIdentity];
+                             self.frame = self.beforeFrame;
+                         }
+                         completion:^(BOOL finished) {
+                             [self.screenButton setImage:[UIImage imageNamed:@"screen"] forState:UIControlStateNormal];
+                             self.isFullScreen = NO;
+                         }];
+        
+        
+        return;
+    
+    }
+    
+    self.beforeFrame = self.frame;
+
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+                         self.frame = [[UIScreen mainScreen] bounds];
+                     }
+                     completion:^(BOOL finished) {
+                         [self.screenButton setImage:[UIImage imageNamed:@"scale"] forState:UIControlStateNormal];
+                         self.isFullScreen = YES;
+                     }];
 
 }
 
