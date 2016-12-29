@@ -11,6 +11,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
+// 由于 slider 的值是根据视频的时间来设置，所以，时间循环调用 slider 自动滚动的间隔，也表示着每次间隔 slider 移动的距离
+static CGFloat zvideo_timer_move_distance = 0.5;
+
 @interface ZVideoPlayerView()
 
 /**
@@ -22,6 +25,11 @@
  播放按钮放在中间位置
  */
 @property (nonatomic, strong) UIButton *playButton;
+
+/**
+ 判断 继续播放按钮是否存在，根据此 布尔类型来判断点击手势是否成立
+ */
+@property (nonatomic, assign) BOOL isPlayButton;
 
 /**
  暂停按钮
@@ -68,6 +76,21 @@
  */
 @property (nonatomic, strong) UISlider *slider;
 
+/**
+ 根据视频的时间设置自动跟新 slider 值
+ */
+@property (nonatomic, strong) NSTimer *sliderTimer;
+
+/**
+ 累计叠加 slider 的值
+ */
+@property (nonatomic) CGFloat countSliderFloat;
+
+/**
+ 计算视频的总时间
+ */
+@property (nonatomic) CGFloat videoTotalTime;
+
 @end
 
 @implementation ZVideoPlayerView
@@ -90,7 +113,7 @@
 
 }
 
-#pragma mark - 属性的 set 方法
+#pragma mark - 属性的 set get 方法
 
 - (void)setUrlString:(NSString *)urlString {
 
@@ -108,6 +131,24 @@
 
 }
 
+- (UIButton *)playButton {
+
+    if(!_playButton) {
+    
+        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_playButton setImage:[[UIImage imageNamed:@"player"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [_playButton addTarget:self action:@selector(replayAction:) forControlEvents:UIControlEventTouchUpInside];
+        _playButton.frame = CGRectMake(0, 0, 80, 80);
+        _playButton.center = CGPointMake(CGRectGetWidth(self.bounds) / 2.0, CGRectGetHeight(self.bounds) / 2.0);
+        self.isPlayButton = YES;
+        [self addSubview:_playButton];
+    
+    }
+    
+    return _playButton;
+
+}
+
 #pragma mark - 构建界面
 
 - (void)loadInit {
@@ -118,6 +159,9 @@
         return;
         
     }
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapVideo:)];
+    [self addGestureRecognizer:tap];
 
 }
 
@@ -149,9 +193,26 @@
     self.topView.userInteractionEnabled = YES;
     [self addSubview:self.topView];
     
+    // 组装 bottomView 部分
     self.slider = [[UISlider alloc] initWithFrame:CGRectZero];
     [self.slider setThumbImage:[UIImage imageNamed:@"movepoint"] forState:UIControlStateNormal];
+    self.videoTotalTime = CMTimeGetSeconds(self.playerItem.asset.duration);
+    self.slider.maximumValue = self.videoTotalTime;
+    self.slider.continuous = YES;
+    [self.slider addTarget:self action:@selector(sliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.bottomView addSubview:self.slider];
+    
+    self.sliderTimer = [NSTimer scheduledTimerWithTimeInterval:zvideo_timer_move_distance target:self selector:@selector(countSlider:) userInfo:nil repeats:YES];
+    
+    self.stopButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.stopButton setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+    [self.stopButton addTarget:self action:@selector(stopAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.bottomView addSubview:self.stopButton];
+    
+    self.screenButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.screenButton setImage:[UIImage imageNamed:@"screen"] forState:UIControlStateNormal];
+    [self.screenButton addTarget:self action:@selector(fullScreenAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.bottomView addSubview:self.screenButton];
     
 }
 
@@ -168,7 +229,9 @@
     CGFloat blackViewHeight = CGRectGetHeight(self.bounds) / 6.0;
     self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - blackViewHeight, CGRectGetWidth(self.bounds), blackViewHeight);
     self.topView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), blackViewHeight);
-    self.slider.frame = CGRectMake(20, 10, CGRectGetWidth(self.bounds) - 40, CGRectGetHeight(self.bottomView.bounds) - 20);
+    self.slider.frame = CGRectMake(40, 10, CGRectGetWidth(self.bounds) - 80, CGRectGetHeight(self.bottomView.bounds) - 20);
+    self.stopButton.frame = CGRectMake((40 - CGRectGetHeight(self.bottomView.bounds) / 2.0) / 2.0, (CGRectGetHeight(self.bottomView.bounds) - CGRectGetHeight(self.bottomView.bounds) / 2.0) / 2.0, CGRectGetHeight(self.bottomView.bounds) / 2.0, CGRectGetHeight(self.bottomView.bounds) / 2.0);
+    self.screenButton.frame = CGRectMake(self.slider.frame.origin.x + self.slider.frame.size.width + 5, (CGRectGetHeight(self.bottomView.bounds) - CGRectGetHeight(self.bottomView.bounds) / 2.0) / 2.0, CGRectGetHeight(self.bottomView.bounds) / 2.0, CGRectGetHeight(self.bottomView.bounds) / 2.0);
 
 }
 
@@ -203,6 +266,113 @@
     [self.layer addSublayer:self.playLayer];
     
     [self.player play];
+
+}
+
+#pragma mark - selector action
+
+- (void)fullScreenAction:(UIButton *)sender {
+
+    NSLog(@"放大");
+
+}
+
+- (void)sliderValueChange:(UISlider *)slider {
+
+    [self.player seekToTime:CMTimeMakeWithSeconds(30, self.slider.value)];
+
+}
+
+- (void)countSlider:(NSTimer *)timer {
+
+    if(self.countSliderFloat > self.videoTotalTime) {
+    
+        [self.sliderTimer invalidate];
+        return;
+    
+    }
+    
+    [self.slider setValue:self.countSliderFloat animated:YES];
+    self.countSliderFloat += zvideo_timer_move_distance;
+
+}
+
+- (void)stopAction:(UIButton *)sender {
+
+    [self.player pause];
+    [self.sliderTimer invalidate];
+    self.sliderTimer = nil;
+    [self afterStop];
+
+}
+
+- (void)replayAction:(UIButton *)sender {
+
+    [self.player play];
+    self.sliderTimer = [NSTimer scheduledTimerWithTimeInterval:zvideo_timer_move_distance target:self selector:@selector(countSlider:) userInfo:nil repeats:YES];
+    [self afterPlay];
+    
+}
+
+- (void)tapVideo:(UITapGestureRecognizer *)gesture {
+
+    if(self.isPlayButton) {
+    
+        return;
+    
+    }
+    
+    if(self.bottomView.hidden) {
+    
+        self.bottomView.hidden = NO;
+        self.topView.hidden = NO;
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.bottomView.alpha = 1;
+                             self.topView.alpha = 1;
+                         }];
+        
+        return;
+    
+    }
+    
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         self.bottomView.alpha = 0;
+                         self.topView.alpha = 0;
+                     }
+                     completion:^(BOOL finished) {
+                         self.bottomView.hidden = YES;
+                         self.topView.hidden = YES;
+                     }];
+
+}
+
+#pragma mark - 点击暂停之后的变化
+
+- (void)afterStop {
+
+    self.playButton.alpha = 0;
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         self.playButton.alpha = 1;
+                     }];
+
+}
+
+#pragma mark - 点击继续播放之后的变化
+
+- (void)afterPlay {
+
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         self.playButton.alpha = 0;
+                     }
+                     completion:^(BOOL finished) {
+                         [self.playButton removeFromSuperview];
+                         self.playButton = nil;
+                         self.isPlayButton = NO;
+                     }];
 
 }
 
