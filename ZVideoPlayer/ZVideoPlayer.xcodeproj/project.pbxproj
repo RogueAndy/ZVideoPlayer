@@ -13,12 +13,12 @@
 		ABE1F2B21E14B243004A6E16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABE1F2B01E14B243004A6E16 /* Main.storyboard */; };
 		ABE1F2B41E14B243004A6E16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABE1F2B31E14B243004A6E16 /* Assets.xcassets */; };
 		ABE1F2B71E14B243004A6E16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABE1F2B51E14B243004A6E16 /* LaunchScreen.storyboard */; };
-		ABE1F2C21E14B29B004A6E16 /* ceshivideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = ABE1F2C11E14B29B004A6E16 /* ceshivideo.mov */; };
 		ABE1F2C61E14B2D5004A6E16 /* ZBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2C51E14B2D5004A6E16 /* ZBaseViewController.m */; };
 		ABE1F2CC1E14B2E1004A6E16 /* ZBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2C91E14B2E1004A6E16 /* ZBaseTableViewCell.m */; };
 		ABE1F2CD1E14B2E1004A6E16 /* ZBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2CB1E14B2E1004A6E16 /* ZBaseView.m */; };
 		ABE1F2D01E14B30D004A6E16 /* ZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2CF1E14B30D004A6E16 /* ZVideoPlayerController.m */; };
 		ABE1F2D31E14B322004A6E16 /* ZVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2D21E14B322004A6E16 /* ZVideoPlayerView.m */; };
+		ABE1F2D51E14F014004A6E16 /* ceshivideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = ABE1F2D41E14F014004A6E16 /* ceshivideo.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,6 @@
 		ABE1F2B31E14B243004A6E16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABE1F2B61E14B243004A6E16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABE1F2B81E14B243004A6E16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ABE1F2C11E14B29B004A6E16 /* ceshivideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = ceshivideo.mov; sourceTree = "<group>"; };
 		ABE1F2C41E14B2D5004A6E16 /* ZBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBaseViewController.h; sourceTree = "<group>"; };
 		ABE1F2C51E14B2D5004A6E16 /* ZBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBaseViewController.m; sourceTree = "<group>"; };
 		ABE1F2C81E14B2E1004A6E16 /* ZBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBaseTableViewCell.h; sourceTree = "<group>"; };
@@ -43,6 +42,7 @@
 		ABE1F2CF1E14B30D004A6E16 /* ZVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVideoPlayerController.m; sourceTree = "<group>"; };
 		ABE1F2D11E14B322004A6E16 /* ZVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVideoPlayerView.h; sourceTree = "<group>"; };
 		ABE1F2D21E14B322004A6E16 /* ZVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVideoPlayerView.m; sourceTree = "<group>"; };
+		ABE1F2D41E14F014004A6E16 /* ceshivideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = ceshivideo.mov; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 		ABE1F2A61E14B243004A6E16 /* ZVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				ABE1F2C11E14B29B004A6E16 /* ceshivideo.mov */,
+				ABE1F2D41E14F014004A6E16 /* ceshivideo.mov */,
 				ABE1F2BE1E14B28A004A6E16 /* Controls */,
 				ABE1F2BF1E14B28A004A6E16 /* ViewControllers */,
 				ABE1F2C01E14B28A004A6E16 /* Views */,
@@ -207,7 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABE1F2B71E14B243004A6E16 /* LaunchScreen.storyboard in Resources */,
-				ABE1F2C21E14B29B004A6E16 /* ceshivideo.mov in Resources */,
+				ABE1F2D51E14F014004A6E16 /* ceshivideo.mov in Resources */,
 				ABE1F2B41E14B243004A6E16 /* Assets.xcassets in Resources */,
 				ABE1F2B21E14B243004A6E16 /* Main.storyboard in Resources */,
 			);
