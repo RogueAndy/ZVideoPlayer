@@ -27,11 +27,6 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 @property (nonatomic, strong) UIButton *playButton;
 
 /**
- 判断 继续播放按钮是否存在，根据此 布尔类型来判断点击手势是否成立
- */
-@property (nonatomic, assign) BOOL isPlayButton;
-
-/**
  暂停按钮
  */
 @property (nonatomic, strong) UIButton *stopButton;
@@ -40,11 +35,6 @@ static CGFloat zvideo_timer_move_distance = 0.5;
  展开或者缩小全屏按钮
  */
 @property (nonatomic, strong) UIButton *screenButton;
-
-/**
- 判断是否是全屏的状态
- */
-@property (nonatomic, assign) BOOL isFullScreen;
 
 /**
  获取视频信息，当前时间以及总时间之类的信息
@@ -82,12 +72,12 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 @property (nonatomic, strong) UISlider *slider;
 
 /**
- 根据视频的时间设置自动跟新 slider 值
+ 根据视频的时间设置自动跟新 slider 值的一个定时器
  */
 @property (nonatomic, strong) NSTimer *sliderTimer;
 
 /**
- 累计叠加 slider 的值
+ 累计叠加 slider 的当前的value值，用于计算 slider 已经滑动的长度
  */
 @property (nonatomic) CGFloat countSliderFloat;
 
@@ -100,6 +90,16 @@ static CGFloat zvideo_timer_move_distance = 0.5;
  记录 view 上次的 frame
  */
 @property (nonatomic) CGRect beforeFrame;
+
+/**
+ 判断 继续播放按钮是否存在，根据此 布尔类型来判断点击手势是否成立
+ */
+@property (nonatomic, assign) BOOL isPlayButton;
+
+/**
+ 判断是否是全屏的状态
+ */
+@property (nonatomic, assign) BOOL isFullScreen;
 
 @end
 
@@ -125,13 +125,12 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
 }
 
-#pragma mark - 属性的 set get 方法
+#pragma mark - 属性的 set get 方法(when urlString != nil(and not ''), it's time to init subViews)
 
 - (void)setUrlString:(NSString *)urlString {
 
     _urlString = urlString;
     
-    // 当地址有了值之后，进行界面的初始化
     [self loadInit];
     [self loadViews];
     [self loadLayout];
@@ -156,7 +155,7 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
 }
 
-#pragma mark - 构建界面
+#pragma mark - 构建界面以及布局(init some base datas and subViews)
 
 - (void)loadInit {
     
@@ -177,17 +176,27 @@ static CGFloat zvideo_timer_move_distance = 0.5;
     
     }
     
-    self.bottomView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-    self.bottomView.userInteractionEnabled = YES;
-    [self addSubview:self.bottomView];
+    /****************************************** 组装 topView 部分 ******************************************/
     
     self.topView = [[UIView alloc] initWithFrame:CGRectZero];
     self.topView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
     self.topView.userInteractionEnabled = YES;
     [self addSubview:self.topView];
     
-    // 组装 bottomView 部分
+    self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.closeButton setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    [self.closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.topView addSubview:self.closeButton];
+    
+    /****************************************** 组装 topView 部分 ******************************************/
+    
+    /****************************************** 组装 bottomView 部分 ******************************************/
+    
+    self.bottomView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+    self.bottomView.userInteractionEnabled = YES;
+    [self addSubview:self.bottomView];
+    
     self.slider = [[UISlider alloc] initWithFrame:CGRectZero];
     [self.slider setThumbImage:[UIImage imageNamed:@"movepoint"] forState:UIControlStateNormal];
     self.videoTotalTime = CMTimeGetSeconds(self.playerItem.asset.duration);
@@ -209,17 +218,30 @@ static CGFloat zvideo_timer_move_distance = 0.5;
     [self.screenButton addTarget:self action:@selector(fullScreenAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView addSubview:self.screenButton];
     
+    /****************************************** 组装 bottomView 部分 ******************************************/
+    
 }
 
 - (void)loadLayout {
 
-    self.playLayer.frame = self.bounds;
     CGFloat blackViewHeight = CGRectGetHeight(self.bounds) / 6.0;
-    self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - blackViewHeight, CGRectGetWidth(self.bounds), blackViewHeight);
+    self.playLayer.frame = self.bounds;
+    
+    /****************************************** 组装 topView 部分 ******************************************/
+    
     self.topView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), blackViewHeight);
+    self.closeButton.frame = CGRectMake(CGRectGetWidth(self.topView.frame) - 35, (CGRectGetHeight(self.topView.bounds) - CGRectGetHeight(self.topView.bounds) / 2.0) / 2.0, CGRectGetHeight(self.topView.bounds) / 2.0, CGRectGetHeight(self.topView.bounds) / 2.0);
+    
+    /****************************************** 组装 topView 部分 ******************************************/
+    
+    /****************************************** 组装 bottomView 部分 ******************************************/
+    
+    self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - blackViewHeight, CGRectGetWidth(self.bounds), blackViewHeight);
     self.slider.frame = CGRectMake(40, 10, CGRectGetWidth(self.bounds) - 80, CGRectGetHeight(self.bottomView.bounds) - 20);
     self.stopButton.frame = CGRectMake((40 - CGRectGetHeight(self.bottomView.bounds) / 2.0) / 2.0, (CGRectGetHeight(self.bottomView.bounds) - CGRectGetHeight(self.bottomView.bounds) / 2.0) / 2.0, CGRectGetHeight(self.bottomView.bounds) / 2.0, CGRectGetHeight(self.bottomView.bounds) / 2.0);
     self.screenButton.frame = CGRectMake(self.slider.frame.origin.x + self.slider.frame.size.width + 5, (CGRectGetHeight(self.bottomView.bounds) - CGRectGetHeight(self.bottomView.bounds) / 2.0) / 2.0, CGRectGetHeight(self.bottomView.bounds) / 2.0, CGRectGetHeight(self.bottomView.bounds) / 2.0);
+    
+    /****************************************** 组装 bottomView 部分 ******************************************/
 
 }
 
@@ -372,6 +394,16 @@ static CGFloat zvideo_timer_move_distance = 0.5;
                          self.topView.hidden = YES;
                      }];
 
+}
+
+- (void)closeAction:(UIButton *)sender {
+
+    if(self.removeViewBlock) {
+    
+        self.removeViewBlock();
+    
+    }
+    
 }
 
 #pragma mark - 点击暂停之后的变化
