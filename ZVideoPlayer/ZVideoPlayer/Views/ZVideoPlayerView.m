@@ -353,6 +353,11 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
     [self.player seekToTime:CMTimeMake(self.slider.value, 1)];
     self.countSliderFloat = self.slider.value;
+    if(self.isPlayButton) {
+    
+        return;
+    
+    }
     self.sliderTimer = [NSTimer scheduledTimerWithTimeInterval:zvideo_timer_move_distance target:self selector:@selector(countSlider:) userInfo:nil repeats:YES];
     [self.player play];
     
