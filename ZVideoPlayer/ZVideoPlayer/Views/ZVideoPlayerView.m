@@ -109,6 +109,7 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
 + (instancetype)initWithLocalVideo:(NSString *)filePath {
 
+    NSAssert(filePath && filePath.length > 0, @"------------ filePath can't be nil or ''");
     ZVideoPlayerView *video = [[ZVideoPlayerView alloc] init];
     video.urlString = filePath;
     return video;
@@ -117,6 +118,7 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
 + (instancetype)initWithOnlineVideo:(NSString *)fileUrl {
 
+    NSAssert(fileUrl && fileUrl.length > 0, @"------------ fileUrl can't be nil or ''");
     ZVideoPlayerView *video = [[ZVideoPlayerView alloc] initWithFrame:CGRectZero];
     video.urlString = fileUrl;
     return video;
@@ -128,11 +130,6 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 - (void)setUrlString:(NSString *)urlString {
 
     _urlString = urlString;
-    if(!self.urlString || self.urlString.length == 0) {
-        
-        return;
-        
-    }
     
     // 当地址有了值之后，进行界面的初始化
     [self loadInit];
@@ -162,13 +159,6 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 #pragma mark - 构建界面
 
 - (void)loadInit {
-
-    [super loadInit];
-    if(!self.urlString || self.urlString.length == 0) {
-        
-        return;
-        
-    }
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapVideo:)];
     [self addGestureRecognizer:tap];
@@ -176,13 +166,7 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 }
 
 - (void)loadViews {
-    
-    [super loadViews];
-    if(!self.urlString || self.urlString.length == 0) {
-    
-        return;
-    
-    }
+
     if([self.urlString hasSuffix:@"http"]) {
     
         [self loadOnlineVideo];
@@ -229,14 +213,7 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
 - (void)loadLayout {
 
-    [super loadLayout];
-    if(!self.urlString || self.urlString.length == 0) {
-        
-        return;
-        
-    }
     self.playLayer.frame = self.bounds;
-    
     CGFloat blackViewHeight = CGRectGetHeight(self.bounds) / 6.0;
     self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - blackViewHeight, CGRectGetWidth(self.bounds), blackViewHeight);
     self.topView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), blackViewHeight);
