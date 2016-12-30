@@ -127,6 +127,27 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
 #pragma mark - 属性的 set get 方法(when urlString != nil(and not ''), it's time to init subViews)
 
+- (void)showViewIn:(UIView *)superView animation:(BOOL)animation {
+
+    if(!animation) {[superView addSubview:self];return;}
+    
+    self.alpha = 0;
+    [superView addSubview:self];
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.alpha = 1;
+                     }];
+
+}
+
+- (void)setIsPlay:(BOOL)isPlay {
+
+    _isPlay = isPlay;
+    if(_isPlay){[self.player play];return;}
+    [self.player pause];
+
+}
+
 - (void)setUrlString:(NSString *)urlString {
 
     _urlString = urlString;
@@ -134,7 +155,7 @@ static CGFloat zvideo_timer_move_distance = 0.5;
     [self loadInit];
     [self loadViews];
     [self loadLayout];
-
+    [self loadInitStatus];
 }
 
 - (UIButton *)playButton {
@@ -206,8 +227,6 @@ static CGFloat zvideo_timer_move_distance = 0.5;
     [self.slider addTarget:self action:@selector(sliderEnd:) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView addSubview:self.slider];
     
-    self.sliderTimer = [NSTimer scheduledTimerWithTimeInterval:zvideo_timer_move_distance target:self selector:@selector(countSlider:) userInfo:nil repeats:YES];
-    
     self.stopButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.stopButton setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
     [self.stopButton addTarget:self action:@selector(stopAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -226,6 +245,7 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
     CGFloat blackViewHeight = CGRectGetHeight(self.bounds) / 6.0;
     self.playLayer.frame = self.bounds;
+    _playButton.center = CGPointMake(CGRectGetWidth(self.bounds) / 2.0, CGRectGetHeight(self.bounds) / 2.0);
     
     /****************************************** 组装 topView 部分 ******************************************/
     
@@ -245,6 +265,17 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
 }
 
+- (void)loadInitStatus {
+
+    self.bottomView.alpha = 0;
+    self.topView.alpha = 0;
+    self.playButton.alpha = 1;
+    self.bottomView.hidden = YES;
+    self.topView.hidden = YES;
+    self.playButton.hidden = NO;
+    self.isPlayButton = YES;
+}
+
 - (void)layoutSubviews {
 
     [super layoutSubviews];
@@ -260,8 +291,6 @@ static CGFloat zvideo_timer_move_distance = 0.5;
     self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
     self.playLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     [self.layer addSublayer:self.playLayer];
-    
-    [self.player play];
 
 }
 
@@ -274,8 +303,6 @@ static CGFloat zvideo_timer_move_distance = 0.5;
     self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
     self.playLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     [self.layer addSublayer:self.playLayer];
-    
-    [self.player play];
 
 }
 
