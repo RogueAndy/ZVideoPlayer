@@ -19,6 +19,7 @@
 		ABE1F2D01E14B30D004A6E16 /* ZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2CF1E14B30D004A6E16 /* ZVideoPlayerController.m */; };
 		ABE1F2D31E14B322004A6E16 /* ZVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2D21E14B322004A6E16 /* ZVideoPlayerView.m */; };
 		ABE1F2D51E14F014004A6E16 /* ceshivideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = ABE1F2D41E14F014004A6E16 /* ceshivideo.mov */; };
+		ABE2FBA71E162C8E00FBC120 /* example_11.gif in Resources */ = {isa = PBXBuildFile; fileRef = ABE2FBA61E162C8E00FBC120 /* example_11.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		ABE1F2D11E14B322004A6E16 /* ZVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVideoPlayerView.h; sourceTree = "<group>"; };
 		ABE1F2D21E14B322004A6E16 /* ZVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVideoPlayerView.m; sourceTree = "<group>"; };
 		ABE1F2D41E14F014004A6E16 /* ceshivideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = ceshivideo.mov; sourceTree = "<group>"; };
+		ABE2FBA61E162C8E00FBC120 /* example_11.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = example_11.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				ABE1F2D41E14F014004A6E16 /* ceshivideo.mov */,
+				ABE2FBA61E162C8E00FBC120 /* example_11.gif */,
 				ABE1F2BE1E14B28A004A6E16 /* Controls */,
 				ABE1F2BF1E14B28A004A6E16 /* ViewControllers */,
 				ABE1F2C01E14B28A004A6E16 /* Views */,
@@ -209,6 +212,7 @@
 				ABE1F2B71E14B243004A6E16 /* LaunchScreen.storyboard in Resources */,
 				ABE1F2D51E14F014004A6E16 /* ceshivideo.mov in Resources */,
 				ABE1F2B41E14B243004A6E16 /* Assets.xcassets in Resources */,
+				ABE2FBA71E162C8E00FBC120 /* example_11.gif in Resources */,
 				ABE1F2B21E14B243004A6E16 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
