@@ -209,7 +209,8 @@ static CGFloat zvideo_timer_move_distance = 0.5;
     self.videoTotalTime = CMTimeGetSeconds(self.playerItem.asset.duration);
     self.slider.maximumValue = self.videoTotalTime;
     self.slider.continuous = YES;
-    [self.slider addTarget:self action:@selector(sliderValueChange:) forControlEvents:UIControlEventValueChanged];
+    [self.slider addTarget:self action:@selector(sliderBegan:) forControlEvents:UIControlEventTouchDown];
+    [self.slider addTarget:self action:@selector(sliderEnd:) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView addSubview:self.slider];
     
     self.sliderTimer = [NSTimer scheduledTimerWithTimeInterval:zvideo_timer_move_distance target:self selector:@selector(countSlider:) userInfo:nil repeats:YES];
@@ -314,10 +315,21 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
 }
 
-- (void)sliderValueChange:(UISlider *)slider {
+- (void)sliderBegan:(UISlider *)sender {
 
-    [self.player seekToTime:CMTimeMakeWithSeconds(30, self.slider.value)];
+    [self.player pause];
+    [self.sliderTimer invalidate];
+    self.sliderTimer = nil;
+    
+}
 
+- (void)sliderEnd:(UISlider *)sender {
+
+    [self.player seekToTime:CMTimeMake(self.slider.value, 1)];
+    self.countSliderFloat = self.slider.value;
+    self.sliderTimer = [NSTimer scheduledTimerWithTimeInterval:zvideo_timer_move_distance target:self selector:@selector(countSlider:) userInfo:nil repeats:YES];
+    [self.player play];
+    
 }
 
 - (void)countSlider:(NSTimer *)timer {
