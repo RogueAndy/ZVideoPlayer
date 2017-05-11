@@ -41,8 +41,9 @@
 
 - (void)showAction:(UIButton *)sender {
 
-    NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"ceshivideo" ofType:@"mov"];
-    self.videoPlayerView = [ZVideoPlayerView initWithLocalVideo:videoPath];
+//    NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"ceshivideo" ofType:@"mov"];
+//    self.videoPlayerView = [ZVideoPlayerView initWithLocalVideo:videoPath];
+    self.videoPlayerView = [ZVideoPlayerView initWithOnlineVideo:@"http://live.cqnews.net/data/video/201705/10/2c24c05b-455b-4348-f6b9-1ab748168e87/transcode_9c44fac4-6bf7-8c9f-9b15-7e9fddc2.mp4"];
     self.videoPlayerView.backgroundColor = [UIColor blackColor];
     
     __weak ZVideoPlayerController *weakSelf = self;
