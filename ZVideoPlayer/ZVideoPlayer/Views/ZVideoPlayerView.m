@@ -187,7 +187,7 @@ static CGFloat zvideo_timer_move_distance = 0.5;
 
 - (void)loadViews {
 
-    if([self.urlString hasSuffix:@"http"]) {
+    if([self.urlString hasPrefix:@"http"]) {
     
         [self loadOnlineVideo];
         
