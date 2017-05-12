@@ -8,6 +8,8 @@
 
 #import "ZVideoPlayerController.h"
 #import "ZVideoPlayerView.h"
+#import "ZVideoListViewController.h"
+#import "ZVideoPlayerViewControllerX.h"
 
 @interface ZVideoPlayerController ()
 
@@ -19,17 +21,23 @@
 
 - (void)loadViews {
     
-    UIButton *showView = [UIButton buttonWithType:UIButtonTypeCustom];
-    [showView addTarget:self action:@selector(showAction:) forControlEvents:UIControlEventTouchUpInside];
-    showView.backgroundColor = [UIColor yellowColor];
-    showView.frame = CGRectMake(20, 100, CGRectGetWidth(self.view.frame) - 40, 40);
-    [self.view addSubview:showView];
+    UIButton *push = [UIButton buttonWithType:UIButtonTypeCustom];
+    [push addTarget:self action:@selector(pushAction:) forControlEvents:UIControlEventTouchUpInside];
+    push.backgroundColor = [UIColor orangeColor];
+    push.frame = CGRectMake(20, 100, CGRectGetWidth(self.view.frame) - 40, 40);
+    [self.view addSubview:push];
     
-    UIButton *test = [UIButton buttonWithType:UIButtonTypeCustom];
-    [test addTarget:self action:@selector(testAction:) forControlEvents:UIControlEventTouchUpInside];
-    test.backgroundColor = [UIColor yellowColor];
-    test.frame = CGRectMake(20, 300, CGRectGetWidth(self.view.frame) - 40, 40);
-    [self.view addSubview:test];
+//    UIButton *showView = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [showView addTarget:self action:@selector(showAction:) forControlEvents:UIControlEventTouchUpInside];
+//    showView.backgroundColor = [UIColor yellowColor];
+//    showView.frame = CGRectMake(20, 100, CGRectGetWidth(self.view.frame) - 40, 40);
+//    [self.view addSubview:showView];
+//    
+//    UIButton *test = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [test addTarget:self action:@selector(testAction:) forControlEvents:UIControlEventTouchUpInside];
+//    test.backgroundColor = [UIColor yellowColor];
+//    test.frame = CGRectMake(20, 300, CGRectGetWidth(self.view.frame) - 40, 40);
+//    [self.view addSubview:test];
 
 }
 
@@ -69,6 +77,13 @@
 - (void)testAction:(UIButton *)sender {
 
     NSLog(@"-----  %@", self.videoPlayerView);
+
+}
+
+- (void)pushAction:(UIButton *)sender {
+
+    ZVideoListViewController *vc = [ZVideoListViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 

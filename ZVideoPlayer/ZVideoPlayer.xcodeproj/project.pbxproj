@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8244A7281EC4278C0009725C /* ZVideoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A7271EC4278C0009725C /* ZVideoListViewController.m */; };
+		8244A72B1EC428710009725C /* ZVideoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A72A1EC428710009725C /* ZVideoListCell.m */; };
+		8244A72E1EC42A020009725C /* ZVideoPlayerViewX.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A72D1EC42A020009725C /* ZVideoPlayerViewX.m */; };
+		8244A7311EC42BB70009725C /* ZVideoControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A7301EC42BB70009725C /* ZVideoControlButton.m */; };
+		8244A7341EC42E130009725C /* ZVideoPlayerViewControllerX.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A7331EC42E130009725C /* ZVideoPlayerViewControllerX.m */; };
+		8244A7371EC44E4E0009725C /* ZSinglePlayerX.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A7361EC44E4E0009725C /* ZSinglePlayerX.m */; };
+		8244A73A1EC55AEB0009725C /* ZVPangestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A7391EC55AEB0009725C /* ZVPangestureView.m */; };
+		8244A73D1EC59C870009725C /* ZVVideoBackgroundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A73C1EC59C870009725C /* ZVVideoBackgroundController.m */; };
+		8244A7401EC5A4330009725C /* RgScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A73F1EC5A4330009725C /* RgScreenShot.m */; };
+		A9EE7BC43DFCBE23CF2F2561 /* libPods-ZVideoPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C0E9F9679B2EDB510E6E84 /* libPods-ZVideoPlayer.a */; };
 		ABE1F2A91E14B243004A6E16 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2A81E14B243004A6E16 /* main.m */; };
 		ABE1F2AC1E14B243004A6E16 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2AB1E14B243004A6E16 /* AppDelegate.m */; };
 		ABE1F2AF1E14B243004A6E16 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2AE1E14B243004A6E16 /* ViewController.m */; };
@@ -23,6 +33,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09C0E9F9679B2EDB510E6E84 /* libPods-ZVideoPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZVideoPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		41853D07ECBA16ABB33E5294 /* Pods-ZVideoPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZVideoPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZVideoPlayer/Pods-ZVideoPlayer.release.xcconfig"; sourceTree = "<group>"; };
+		8244A7261EC4278C0009725C /* ZVideoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVideoListViewController.h; sourceTree = "<group>"; };
+		8244A7271EC4278C0009725C /* ZVideoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVideoListViewController.m; sourceTree = "<group>"; };
+		8244A7291EC428710009725C /* ZVideoListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVideoListCell.h; sourceTree = "<group>"; };
+		8244A72A1EC428710009725C /* ZVideoListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVideoListCell.m; sourceTree = "<group>"; };
+		8244A72C1EC42A020009725C /* ZVideoPlayerViewX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVideoPlayerViewX.h; sourceTree = "<group>"; };
+		8244A72D1EC42A020009725C /* ZVideoPlayerViewX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVideoPlayerViewX.m; sourceTree = "<group>"; };
+		8244A72F1EC42BB70009725C /* ZVideoControlButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVideoControlButton.h; sourceTree = "<group>"; };
+		8244A7301EC42BB70009725C /* ZVideoControlButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVideoControlButton.m; sourceTree = "<group>"; };
+		8244A7321EC42E130009725C /* ZVideoPlayerViewControllerX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVideoPlayerViewControllerX.h; sourceTree = "<group>"; };
+		8244A7331EC42E130009725C /* ZVideoPlayerViewControllerX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVideoPlayerViewControllerX.m; sourceTree = "<group>"; };
+		8244A7351EC44E4E0009725C /* ZSinglePlayerX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSinglePlayerX.h; sourceTree = "<group>"; };
+		8244A7361EC44E4E0009725C /* ZSinglePlayerX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSinglePlayerX.m; sourceTree = "<group>"; };
+		8244A7381EC55AEB0009725C /* ZVPangestureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVPangestureView.h; sourceTree = "<group>"; };
+		8244A7391EC55AEB0009725C /* ZVPangestureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVPangestureView.m; sourceTree = "<group>"; };
+		8244A73B1EC59C870009725C /* ZVVideoBackgroundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVVideoBackgroundController.h; sourceTree = "<group>"; };
+		8244A73C1EC59C870009725C /* ZVVideoBackgroundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVVideoBackgroundController.m; sourceTree = "<group>"; };
+		8244A73E1EC5A4330009725C /* RgScreenShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgScreenShot.h; sourceTree = "<group>"; };
+		8244A73F1EC5A4330009725C /* RgScreenShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgScreenShot.m; sourceTree = "<group>"; };
 		ABE1F2A41E14B243004A6E16 /* ZVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABE1F2A81E14B243004A6E16 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ABE1F2AA1E14B243004A6E16 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -45,6 +75,7 @@
 		ABE1F2D21E14B322004A6E16 /* ZVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVideoPlayerView.m; sourceTree = "<group>"; };
 		ABE1F2D41E14F014004A6E16 /* ceshivideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = ceshivideo.mov; sourceTree = "<group>"; };
 		ABE2FBA61E162C8E00FBC120 /* example_11.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = example_11.gif; sourceTree = "<group>"; };
+		D6FF7706146073F6D8970F17 /* Pods-ZVideoPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZVideoPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZVideoPlayer/Pods-ZVideoPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,17 +83,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9EE7BC43DFCBE23CF2F2561 /* libPods-ZVideoPlayer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2570466D0FD1F04F690BDAAD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D6FF7706146073F6D8970F17 /* Pods-ZVideoPlayer.debug.xcconfig */,
+				41853D07ECBA16ABB33E5294 /* Pods-ZVideoPlayer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		ABE1F29B1E14B243004A6E16 = {
 			isa = PBXGroup;
 			children = (
 				ABE1F2A61E14B243004A6E16 /* ZVideoPlayer */,
 				ABE1F2A51E14B243004A6E16 /* Products */,
+				2570466D0FD1F04F690BDAAD /* Pods */,
+				CA709F833F480FA4E79E758A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +159,10 @@
 				ABE1F2C31E14B2D5004A6E16 /* BaseViewControllers */,
 				ABE1F2CE1E14B30D004A6E16 /* ZVideoPlayerController.h */,
 				ABE1F2CF1E14B30D004A6E16 /* ZVideoPlayerController.m */,
+				8244A7261EC4278C0009725C /* ZVideoListViewController.h */,
+				8244A7271EC4278C0009725C /* ZVideoListViewController.m */,
+				8244A7321EC42E130009725C /* ZVideoPlayerViewControllerX.h */,
+				8244A7331EC42E130009725C /* ZVideoPlayerViewControllerX.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -126,6 +173,20 @@
 				ABE1F2C71E14B2E1004A6E16 /* BaseViews */,
 				ABE1F2D11E14B322004A6E16 /* ZVideoPlayerView.h */,
 				ABE1F2D21E14B322004A6E16 /* ZVideoPlayerView.m */,
+				8244A73E1EC5A4330009725C /* RgScreenShot.h */,
+				8244A73F1EC5A4330009725C /* RgScreenShot.m */,
+				8244A7291EC428710009725C /* ZVideoListCell.h */,
+				8244A72A1EC428710009725C /* ZVideoListCell.m */,
+				8244A72C1EC42A020009725C /* ZVideoPlayerViewX.h */,
+				8244A72D1EC42A020009725C /* ZVideoPlayerViewX.m */,
+				8244A72F1EC42BB70009725C /* ZVideoControlButton.h */,
+				8244A7301EC42BB70009725C /* ZVideoControlButton.m */,
+				8244A7351EC44E4E0009725C /* ZSinglePlayerX.h */,
+				8244A7361EC44E4E0009725C /* ZSinglePlayerX.m */,
+				8244A7381EC55AEB0009725C /* ZVPangestureView.h */,
+				8244A7391EC55AEB0009725C /* ZVPangestureView.m */,
+				8244A73B1EC59C870009725C /* ZVVideoBackgroundController.h */,
+				8244A73C1EC59C870009725C /* ZVVideoBackgroundController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -150,6 +211,14 @@
 			path = BaseViews;
 			sourceTree = "<group>";
 		};
+		CA709F833F480FA4E79E758A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				09C0E9F9679B2EDB510E6E84 /* libPods-ZVideoPlayer.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,9 +226,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ABE1F2BB1E14B243004A6E16 /* Build configuration list for PBXNativeTarget "ZVideoPlayer" */;
 			buildPhases = (
+				177AF0AF944DE73097D66246 /* [CP] Check Pods Manifest.lock */,
 				ABE1F2A01E14B243004A6E16 /* Sources */,
 				ABE1F2A11E14B243004A6E16 /* Frameworks */,
 				ABE1F2A21E14B243004A6E16 /* Resources */,
+				420A9FB15637D3A88BA2A709 /* [CP] Embed Pods Frameworks */,
+				108DFF54FF665A7C55704DEF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -219,19 +291,76 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		108DFF54FF665A7C55704DEF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZVideoPlayer/Pods-ZVideoPlayer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		177AF0AF944DE73097D66246 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		420A9FB15637D3A88BA2A709 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZVideoPlayer/Pods-ZVideoPlayer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		ABE1F2A01E14B243004A6E16 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8244A72B1EC428710009725C /* ZVideoListCell.m in Sources */,
 				ABE1F2CD1E14B2E1004A6E16 /* ZBaseView.m in Sources */,
+				8244A7311EC42BB70009725C /* ZVideoControlButton.m in Sources */,
+				8244A73D1EC59C870009725C /* ZVVideoBackgroundController.m in Sources */,
+				8244A73A1EC55AEB0009725C /* ZVPangestureView.m in Sources */,
 				ABE1F2C61E14B2D5004A6E16 /* ZBaseViewController.m in Sources */,
+				8244A7371EC44E4E0009725C /* ZSinglePlayerX.m in Sources */,
 				ABE1F2D01E14B30D004A6E16 /* ZVideoPlayerController.m in Sources */,
+				8244A7341EC42E130009725C /* ZVideoPlayerViewControllerX.m in Sources */,
 				ABE1F2AF1E14B243004A6E16 /* ViewController.m in Sources */,
 				ABE1F2CC1E14B2E1004A6E16 /* ZBaseTableViewCell.m in Sources */,
 				ABE1F2AC1E14B243004A6E16 /* AppDelegate.m in Sources */,
 				ABE1F2D31E14B322004A6E16 /* ZVideoPlayerView.m in Sources */,
 				ABE1F2A91E14B243004A6E16 /* main.m in Sources */,
+				8244A72E1EC42A020009725C /* ZVideoPlayerViewX.m in Sources */,
+				8244A7281EC4278C0009725C /* ZVideoListViewController.m in Sources */,
+				8244A7401EC5A4330009725C /* RgScreenShot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +478,7 @@
 		};
 		ABE1F2BC1E14B243004A6E16 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6FF7706146073F6D8970F17 /* Pods-ZVideoPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -364,6 +494,7 @@
 		};
 		ABE1F2BD1E14B243004A6E16 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41853D07ECBA16ABB33E5294 /* Pods-ZVideoPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

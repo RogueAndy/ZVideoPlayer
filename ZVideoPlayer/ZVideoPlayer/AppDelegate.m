@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ZVideoPlayerController.h"
+#import "ZVideoPlayerViewControllerX.h"
 
 @interface AppDelegate ()
 
