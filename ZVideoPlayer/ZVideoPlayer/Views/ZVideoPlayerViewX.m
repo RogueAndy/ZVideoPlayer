@@ -425,13 +425,11 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     if(self.isFullScreen) {
         
         [self fullScreen];
-         [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
         return;
         
     }
     
     [self unFullScreen];
-     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     
 }
 
@@ -617,13 +615,13 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
         self.willFullScreenBlock();
         self.pangestureView = [[ZVPangestureView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.pangestureView.backgroundColor = [UIColor clearColor];
+        self.pangestureView.backgroundColor = [UIColor orangeColor];
         [self.vvideoBackgroundController.view addSubview:self.pangestureView];
         self.pangestureView.isLoadGesture = YES;
         [self.pangestureView addSubview:self];
         
         [UIView animateWithDuration:0.25
                          animations:^{
-                             [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
                              self.frame = [[UIScreen mainScreen] bounds];
                          }
                          completion:^(BOOL finished) {
@@ -632,27 +630,6 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
                          }];
         
     }];
-
-    return;
-    
-    self.beforeFrame = self.frame;
-    
-    self.willFullScreenBlock();
-    self.pangestureView = [[ZVPangestureView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.pangestureView.backgroundColor = [UIColor clearColor];
-    [self.bgView addSubview:self.pangestureView];
-    self.pangestureView.isLoadGesture = YES;
-    [self.pangestureView addSubview:self];
-    
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
-                         self.frame = [[UIScreen mainScreen] bounds];
-                     }
-                     completion:^(BOOL finished) {
-                         [self.screenButton setImage:[UIImage imageNamed:@"scale"] forState:UIControlStateNormal];
-                         self.isFullScreen = YES;
-                     }];
 
 }
 

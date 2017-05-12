@@ -92,25 +92,4 @@
 
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    _testView = [UIView new];
-    _testView.frame = [[UIScreen mainScreen] bounds];
-    _testView.backgroundColor = [UIColor orangeColor];
-    [self.navigationController.view addSubview:_testView];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCLear)];
-    [_testView addGestureRecognizer:tap];
-
-}
-
-- (void)tapCLear {
-
-    [_testView removeFromSuperview];
-    _testView = nil;
-
-}
-
 @end
