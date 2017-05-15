@@ -70,58 +70,42 @@
 
 }
 
+#pragma mark - 响应播放视频事件，对播放器传入必要参数以及处理回调事件
+
 - (void)play:(UIButton *)sender {
 
     self.clickIndex(self.cellIndex);
+    
+    // 开始给 视频播放器传入必要参数
     ZSinglePlayerX *player = [ZSinglePlayerX initWithOnlineVideo:_urlString];
     player.frame = self.bounds;
     player.backgroundColor = [UIColor blackColor];
     
-    __block ZSinglePlayerX *strongPlayer = player;
-    player.removeViewBlock = ^{
-        
-        self.bgImageView.hidden = NO;
-        self.bgImageView.alpha = 1;
-        [strongPlayer removeFromSuperview];
-        [UIView animateWithDuration:0.25
-                         animations:^{
-                             self.bgImageView.alpha = 1;
-                             strongPlayer.alpha = 0;
-                         }
-                         completion:^(BOOL finished) {
-                             
-                             [strongPlayer removeFromSuperview];
-                             
-                         }];
-        
-    };
-    
+    __weak ZVideoListCell *weakSelf = self;
     __weak ZSinglePlayerX *weakPlayer = player;
+    player.removeViewBlock = ^{
+        [weakSelf closePlayer];
+    };
     player.willUnFullScreenBlock = ^{
-        [self showPlayer];
-        [weakPlayer showViewIn:self animation:YES];
+//        [weakSelf showPlayer];
+//        [weakPlayer showViewIn:weakSelf animation:NO];
+        [weakSelf showPlayer];
+        [weakPlayer showViewIn:weakSelf animation:NO animationComplete:nil];
     };
-    
     player.willFullScreenBlock = ^{
-        [self closePlayer];
+        [weakSelf closePlayer];
     };
-
-    [player showViewIn:self animation:YES];
-    player.isPlay = YES;
-    self.bgImageView.hidden = YES;
-    self.bgImageView.alpha = 0;
-    
     player.superViewController = self.superViewController;
     player.returnCellRectInSuperView = self.returnCellRectInSuperView;
     
+    [player showViewIn:self animation:YES animationComplete:^{
+        [weakSelf showPlayer]; //隐藏 cell上的默认背景图
+    }]; // 添加视频
+    player.isPlay = YES; // 开始播放
+    
 }
 
-- (void)closePlayer {
-
-    self.bgImageView.hidden = NO;
-    self.bgImageView.alpha = 1;
-
-}
+#pragma mark - 开启视频，隐藏背景图
 
 - (void)showPlayer {
 
@@ -129,6 +113,17 @@
     self.bgImageView.alpha = 0;
 
 }
+
+#pragma mark - 关闭视频，显示背景图
+
+- (void)closePlayer {
+    
+    self.bgImageView.hidden = NO;
+    self.bgImageView.alpha = 1;
+    
+}
+
+#pragma mark - 滑动时候，若有视频在播放，并且播放视频所在 cell 超出了屏幕当前范围，则关闭播放器
 
 - (void)scrollClosePlayer {
 

@@ -72,7 +72,7 @@
  @param superView 父类图
  @param animation 是否显示动画效果
  */
-- (void)showViewIn:(UIView *)superView animation:(BOOL)animation;
+- (void)showViewIn:(UIView *)superView animation:(BOOL)animation animationComplete:(void (^)(void))complete;
 
 /**
  关闭播放器

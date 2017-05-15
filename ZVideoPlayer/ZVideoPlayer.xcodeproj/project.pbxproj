@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		823FC08F1EC9AD22006A4D02 /* ZVVideoNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 823FC08E1EC9AD22006A4D02 /* ZVVideoNavigationController.m */; };
 		8244A7281EC4278C0009725C /* ZVideoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A7271EC4278C0009725C /* ZVideoListViewController.m */; };
 		8244A72B1EC428710009725C /* ZVideoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A72A1EC428710009725C /* ZVideoListCell.m */; };
 		8244A72E1EC42A020009725C /* ZVideoPlayerViewX.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A72D1EC42A020009725C /* ZVideoPlayerViewX.m */; };
@@ -35,6 +36,8 @@
 /* Begin PBXFileReference section */
 		09C0E9F9679B2EDB510E6E84 /* libPods-ZVideoPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZVideoPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41853D07ECBA16ABB33E5294 /* Pods-ZVideoPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZVideoPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZVideoPlayer/Pods-ZVideoPlayer.release.xcconfig"; sourceTree = "<group>"; };
+		823FC08D1EC9AD22006A4D02 /* ZVVideoNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVVideoNavigationController.h; sourceTree = "<group>"; };
+		823FC08E1EC9AD22006A4D02 /* ZVVideoNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVVideoNavigationController.m; sourceTree = "<group>"; };
 		8244A7261EC4278C0009725C /* ZVideoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVideoListViewController.h; sourceTree = "<group>"; };
 		8244A7271EC4278C0009725C /* ZVideoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVideoListViewController.m; sourceTree = "<group>"; };
 		8244A7291EC428710009725C /* ZVideoListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZVideoListCell.h; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 				8244A7391EC55AEB0009725C /* ZVPangestureView.m */,
 				8244A73B1EC59C870009725C /* ZVVideoBackgroundController.h */,
 				8244A73C1EC59C870009725C /* ZVVideoBackgroundController.m */,
+				823FC08D1EC9AD22006A4D02 /* ZVVideoNavigationController.h */,
+				823FC08E1EC9AD22006A4D02 /* ZVVideoNavigationController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 			files = (
 				8244A72B1EC428710009725C /* ZVideoListCell.m in Sources */,
 				ABE1F2CD1E14B2E1004A6E16 /* ZBaseView.m in Sources */,
+				823FC08F1EC9AD22006A4D02 /* ZVVideoNavigationController.m in Sources */,
 				8244A7311EC42BB70009725C /* ZVideoControlButton.m in Sources */,
 				8244A73D1EC59C870009725C /* ZVVideoBackgroundController.m in Sources */,
 				8244A73A1EC55AEB0009725C /* ZVPangestureView.m in Sources */,

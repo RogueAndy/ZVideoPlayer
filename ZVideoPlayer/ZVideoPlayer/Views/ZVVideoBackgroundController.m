@@ -29,47 +29,22 @@
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.view.backgroundColor = [UIColor clearColor];
+    self.navigationController.navigationBarHidden = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forbidCrash:)];
     [self.view addGestureRecognizer:tap];
+    
+    self.imageViewC = [[UIImageView alloc] init];
+//    CGAffineTransform left = CGAffineTransformMakeRotation(M_PI * 1.5);
+//    [self.imageViewC setTransform:left];
+//    NSLog(@"%@", [NSValue valueWithCGRect:[[UIScreen mainScreen] bounds]]);
+//    self.imageViewC.frame = CGRectMake(0, 0, CGRectGetHeight([[UIScreen mainScreen] bounds]), CGRectGetWidth([[UIScreen mainScreen] bounds]));
+    self.imageViewC.frame = [[UIScreen mainScreen] bounds];
+    self.imageViewC.image = self.image;
+    [self.view addSubview:self.imageViewC];
 
 }
 
-- (UIImageView *)imageViewC {
-
-    if(!_imageViewC) {
-    
-        _imageViewC = [[UIImageView alloc] initWithFrame:self.view.bounds];
-        [self.view addSubview:_imageViewC];
-    
-    }
-    
-    return _imageViewC;
-
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-
-    [super viewDidAppear:animated];
-
-}
-
-/**
- 设置背景图片
-
- @param image <#image description#>
- */
-- (void)setImage:(UIImage *)image {
-
-    _image = image;
-    self.imageViewC.image = _image;
-    
-    CGAffineTransform left = CGAffineTransformMakeRotation(270 *M_PI / 180.0);
-    [self.imageViewC setTransform:left];
-    self.imageViewC.frame = CGRectMake(0, 0, CGRectGetHeight([[UIScreen mainScreen] bounds]), CGRectGetWidth([[UIScreen mainScreen] bounds]));
-    
-}
 
 - (void)forbidCrash:(UITapGestureRecognizer *)tap {
 
@@ -79,7 +54,7 @@
 
 - (BOOL)prefersStatusBarHidden {
 
-    return YES;
+    return NO;
 
 }
 

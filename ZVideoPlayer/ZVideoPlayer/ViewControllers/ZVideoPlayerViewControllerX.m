@@ -52,7 +52,7 @@
         
     };
     
-    [self.videoPlayerViewX showViewIn:self.navigationController.view animation:YES];
+    [self.videoPlayerViewX showViewIn:self.navigationController.view animation:YES animationComplete:nil];
     
     [self loadLayout];
     

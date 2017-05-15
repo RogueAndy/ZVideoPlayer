@@ -27,6 +27,8 @@
     push.frame = CGRectMake(20, 100, CGRectGetWidth(self.view.frame) - 40, 40);
     [self.view addSubview:push];
     
+    self.navigationController.view.backgroundColor = [UIColor whiteColor];
+    
 //    UIButton *showView = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [showView addTarget:self action:@selector(showAction:) forControlEvents:UIControlEventTouchUpInside];
 //    showView.backgroundColor = [UIColor yellowColor];

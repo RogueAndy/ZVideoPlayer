@@ -14,6 +14,8 @@
 #import "ZVPangestureView.h"
 #import "ZVVideoBackgroundController.h"
 #import "RgScreenShot.h"
+#import "ZVVideoBackgroundController.h"
+#import "ZVVideoNavigationController.h"
 
 @interface ZVTimeTransform : NSObject
 
@@ -163,6 +165,8 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
  */
 @property (nonatomic, strong) ZVVideoBackgroundController *vvideoBackgroundController;
 
+@property (nonatomic, strong) ZVVideoNavigationController *vvideoNavigationController;
+
 @end
 
 @implementation ZVideoPlayerViewX
@@ -197,15 +201,23 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
 
 #pragma mark - 属性的 set get 方法(when urlString != nil(and not ''), it's time to init subViews)
 
-- (void)showViewIn:(UIView *)superView animation:(BOOL)animation {
+- (void)showViewIn:(UIView *)superView animation:(BOOL)animation animationComplete:(void (^)(void))complete {
     
     if(!animation) {[superView addSubview:self];return;}
     
     self.alpha = 0;
     [superView addSubview:self];
-    [UIView animateWithDuration:0.3
+    [UIView animateWithDuration:0.25
                      animations:^{
                          self.alpha = 1;
+                     }
+                     completion:^(BOOL finished) {
+                         if(complete) {
+                         
+                             complete();
+                         
+                         }
+                         
                      }];
     
 }
@@ -273,6 +285,7 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
 
 - (void)loadInit {
     
+    // 添加点击手势，用来控制工具栏的显示
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapVideo:)];
     [self addGestureRecognizer:tap];
     
@@ -539,22 +552,31 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
  */
 - (void)closeAction:(UIButton *)sender {
     
-    if(self.isFullScreen) {
+    if(self.isFullScreen) { // 全屏情况下
     
         if(self.removeViewBlock) {
             
-            [self afterStop];
+            [self afterStop]; // 停止时间条控制
             [self fullScreenAndIsClose:YES];
         }
         return;
     
     }
     
-    if(self.removeViewBlock) {
+    if(self.removeViewBlock) { // 非全屏情况下
         
-        [self afterStop];
+        [self afterStop]; // 停止时间条控制
         self.removeViewBlock();
-        [self clearAll];
+    
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.alpha = 0;
+                         }
+                         completion:^(BOOL finished) {
+                             [self removeFromSuperview];
+                             self.alpha = 1;
+                             [self clearAll];
+                         }];
         
     }
     
@@ -597,8 +619,18 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
 - (void)unFullScreen {
     
     self.vvideoBackgroundController = [ZVVideoBackgroundController initWithBackgroundImage:[RgScreenShot imageWithViewController:self.superViewController]];
+    self.vvideoNavigationController = [[ZVVideoNavigationController alloc] initWithRootViewController:self.vvideoBackgroundController];
     
-    [self.superViewController presentViewController:self.vvideoBackgroundController animated:NO completion:^{
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        UIImage *image = [RgScreenShot imageWithViewController:self.superViewController];
+//        self.vvideoBackgroundController = [[ZVVideoBackgroundController alloc] init];
+//        self.vvideoBackgroundController.image = image;
+//    });
+    
+//    NSLog(@"当前的线程 %@", [NSThread currentThread]);
+//    [self.superViewController presentViewController:cus animated:NO completion:nil];
+//    return;
+    [self.superViewController presentViewController:self.vvideoNavigationController animated:NO completion:^{
        
         self.beforeFrame = self.frame;
         
@@ -609,16 +641,18 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
         self.pangestureView.isLoadGesture = YES;
         [self.pangestureView addSubview:self];
         
-        // 由于在进入 ZVVideoBackgroundController 会使手机进入横屏状态，所以坐标轴反转
-        CGAffineTransform form = CGAffineTransformMakeRotation(-M_PI / 2.0);
-        [self setTransform:form];
-        
+//        // 由于在进入 ZVVideoBackgroundController 会使手机进入横屏状态，所以坐标轴反转
+//        CGAffineTransform form = CGAffineTransformMakeRotation(-M_PI / 2.0);
+//        [self setTransform:form];
+//        
         CGRect cellRectInSuperView = self.returnCellRectInSuperView();
-        self.frame = CGRectMake(cellRectInSuperView.origin.y + 64, cellRectInSuperView.origin.x, CGRectGetHeight(cellRectInSuperView), CGRectGetWidth(cellRectInSuperView));
-        
+//        self.frame = CGRectMake(cellRectInSuperView.origin.y + 64, cellRectInSuperView.origin.x, CGRectGetHeight(cellRectInSuperView), CGRectGetWidth(cellRectInSuperView));
+        self.frame = CGRectMake(cellRectInSuperView.origin.x, cellRectInSuperView.origin.y + 64, cellRectInSuperView.size.width, cellRectInSuperView.size.height);
+
         [UIView animateWithDuration:0.25
                          animations:^{
-                             [self setTransform:CGAffineTransformIdentity];
+                             CGAffineTransform form = CGAffineTransformMakeRotation(M_PI / 2.0);
+                             [self setTransform:form];
                              self.frame = [[UIScreen mainScreen] bounds];
                          }
                          completion:^(BOOL finished) {
@@ -649,49 +683,19 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
 
     [self scaleThePlayer];
     
-    
-//    [UIView animateWithDuration:0.25
-//                     animations:^{
-//                         
-//                         // 由于再放大的时候，进行了一个旋转，所以这里需要还原视图，还需要再次旋转
-//                         CGAffineTransform form = CGAffineTransformMakeRotation(-M_PI / 2.0);
-//                         [self setTransform:form];
-//                         CGRect cellRectInSuperView = self.returnCellRectInSuperView();
-//                         self.frame = CGRectMake(cellRectInSuperView.origin.y + 64, cellRectInSuperView.origin.x, CGRectGetHeight(cellRectInSuperView), CGRectGetWidth(cellRectInSuperView));
-//                         
-//                     }
-//                     completion:^(BOOL finished) {
-//                         [self.screenButton setImage:[UIImage imageNamed:@"screen"] forState:UIControlStateNormal];
-//                         self.isFullScreen = NO;
-//                         
-//                         [self.pangestureView removeFromSuperview];
-//                         self.pangestureView = nil;
-//                         
-//                         [self.vvideoBackgroundController dismissViewControllerAnimated:NO completion:nil];
-//                         self.vvideoBackgroundController = nil;
-//                         
-//                         [self setTransform:CGAffineTransformIdentity];
-//                         self.frame = self.beforeFrame;
-//                         if(!is) {
-//                         
-//                             self.willUnFullScreenBlock();
-//                             
-//                         }
-//                         
-//                     }];
-    
 }
 
 - (void)closeThePlayer {
 
     [self.pangestureView removeFromSuperview];
     self.pangestureView = nil;
-    [self.vvideoBackgroundController dismissViewControllerAnimated:NO completion:^{
+    [self.vvideoNavigationController dismissViewControllerAnimated:NO completion:^{
         CGAffineTransform form = CGAffineTransformMakeRotation(M_PI / 2.0);
         [self setTransform:form];
         self.frame = [[UIScreen mainScreen] bounds];
         [self.superViewController.view addSubview:self];
         
+        self.removeViewBlock();
         [UIView animateWithDuration:0.25
                          animations:^{
                              
@@ -700,13 +704,15 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
                              [self setTransform:form];
                              CGRect cellRectInSuperView = self.returnCellRectInSuperView();
                              self.frame = CGRectMake(cellRectInSuperView.origin.x, cellRectInSuperView.origin.y + 64, CGRectGetWidth(cellRectInSuperView), CGRectGetHeight(cellRectInSuperView));
+                             self.alpha = 0;
                              
                          }
                          completion:^(BOOL finished) {
                              
                              [self.screenButton setImage:[UIImage imageNamed:@"screen"] forState:UIControlStateNormal];
                              self.isFullScreen = NO;
-                             self.removeViewBlock();
+                             [self removeFromSuperview];
+                             self.alpha = 1;
                              [self clearAll];
                              
                          }];
@@ -743,6 +749,8 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
                              [self setTransform:CGAffineTransformIdentity];
                              self.frame = self.beforeFrame;
                              self.willUnFullScreenBlock();
+                             self.vvideoBackgroundController = nil;
+                             self.vvideoNavigationController = nil;
                              
                          }];
         
@@ -830,6 +838,7 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     self.beforeFrame = CGRectZero;
     self.superViewController = nil;
     self.vvideoBackgroundController = nil;
+    self.vvideoNavigationController = nil;
 
 }
 

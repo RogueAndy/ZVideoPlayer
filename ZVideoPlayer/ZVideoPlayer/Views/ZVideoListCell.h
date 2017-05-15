@@ -14,6 +14,14 @@
 
 @property (nonatomic, strong) CGRect (^returnCellRectInSuperView)(void);
 
+/**
+ 给 cell 传入参数
+
+ @param image 图像
+ @param urlString 播放视频地址
+ @param index 点击了第几个 cell, 用来记录上一次播放的 cell,当用户点击了下一个 cell的时候，控制上一个 cell 关闭播放
+ @param block 点击之后的回调
+ */
 - (void)setImage:(NSString *)image urlString:(NSString *)urlString cellIndex:(NSInteger)index clickCell:(void (^)(NSInteger))block;
 
 /**
