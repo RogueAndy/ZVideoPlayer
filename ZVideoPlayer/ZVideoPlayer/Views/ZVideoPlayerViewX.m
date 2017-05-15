@@ -191,14 +191,6 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
 
 - (void)closePlayer {
 
-//    if(self.isFullScreen) {
-//    
-//        [self fullScreen];
-//        return;
-//        
-//    }
-//    
-//    [self removeFromSuperview];
     [self closeAction:nil];
 
 }
@@ -424,7 +416,7 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     
     if(self.isFullScreen) {
         
-        [self fullScreen];
+        [self fullScreenAndIsClose:NO];
         return;
         
     }
@@ -552,9 +544,7 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
         if(self.removeViewBlock) {
             
             [self afterStop];
-            [self fullScreen];
-            self.removeViewBlock();
-            [self clearAll];
+            [self fullScreenAndIsClose:YES];
         }
         return;
     
@@ -615,13 +605,20 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
         self.willFullScreenBlock();
         self.pangestureView = [[ZVPangestureView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.pangestureView.backgroundColor = [UIColor clearColor];
-        self.pangestureView.backgroundColor = [UIColor orangeColor];
         [self.vvideoBackgroundController.view addSubview:self.pangestureView];
         self.pangestureView.isLoadGesture = YES;
         [self.pangestureView addSubview:self];
         
+        // 由于在进入 ZVVideoBackgroundController 会使手机进入横屏状态，所以坐标轴反转
+        CGAffineTransform form = CGAffineTransformMakeRotation(-M_PI / 2.0);
+        [self setTransform:form];
+        
+        CGRect cellRectInSuperView = self.returnCellRectInSuperView();
+        self.frame = CGRectMake(cellRectInSuperView.origin.y + 64, cellRectInSuperView.origin.x, CGRectGetHeight(cellRectInSuperView), CGRectGetWidth(cellRectInSuperView));
+        
         [UIView animateWithDuration:0.25
                          animations:^{
+                             [self setTransform:CGAffineTransformIdentity];
                              self.frame = [[UIScreen mainScreen] bounds];
                          }
                          completion:^(BOOL finished) {
@@ -635,26 +632,121 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
 
 
 
+
 /**
  该方法用于，当界面是全屏的时候，需要缩小或者被关闭还原
+
+ @param is 是否被关闭，YES为关闭
  */
-- (void)fullScreen {
+- (void)fullScreenAndIsClose:(BOOL)is {
+    
+    if(is) {
+
+        [self closeThePlayer];
+        return;
+    
+    }
+
+    [self scaleThePlayer];
+    
+    
+//    [UIView animateWithDuration:0.25
+//                     animations:^{
+//                         
+//                         // 由于再放大的时候，进行了一个旋转，所以这里需要还原视图，还需要再次旋转
+//                         CGAffineTransform form = CGAffineTransformMakeRotation(-M_PI / 2.0);
+//                         [self setTransform:form];
+//                         CGRect cellRectInSuperView = self.returnCellRectInSuperView();
+//                         self.frame = CGRectMake(cellRectInSuperView.origin.y + 64, cellRectInSuperView.origin.x, CGRectGetHeight(cellRectInSuperView), CGRectGetWidth(cellRectInSuperView));
+//                         
+//                     }
+//                     completion:^(BOOL finished) {
+//                         [self.screenButton setImage:[UIImage imageNamed:@"screen"] forState:UIControlStateNormal];
+//                         self.isFullScreen = NO;
+//                         
+//                         [self.pangestureView removeFromSuperview];
+//                         self.pangestureView = nil;
+//                         
+//                         [self.vvideoBackgroundController dismissViewControllerAnimated:NO completion:nil];
+//                         self.vvideoBackgroundController = nil;
+//                         
+//                         [self setTransform:CGAffineTransformIdentity];
+//                         self.frame = self.beforeFrame;
+//                         if(!is) {
+//                         
+//                             self.willUnFullScreenBlock();
+//                             
+//                         }
+//                         
+//                     }];
+    
+}
+
+- (void)closeThePlayer {
 
     [self.pangestureView removeFromSuperview];
     self.pangestureView = nil;
-    self.willUnFullScreenBlock();
-    [self.vvideoBackgroundController dismissViewControllerAnimated:NO completion:nil];
-    self.vvideoBackgroundController = nil;
+    [self.vvideoBackgroundController dismissViewControllerAnimated:NO completion:^{
+        CGAffineTransform form = CGAffineTransformMakeRotation(M_PI / 2.0);
+        [self setTransform:form];
+        self.frame = [[UIScreen mainScreen] bounds];
+        [self.superViewController.view addSubview:self];
+        
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             
+                             // 由于再放大的时候，进行了一个旋转，所以这里需要还原视图，还需要再次旋转
+                             CGAffineTransform form = CGAffineTransformIdentity;
+                             [self setTransform:form];
+                             CGRect cellRectInSuperView = self.returnCellRectInSuperView();
+                             self.frame = CGRectMake(cellRectInSuperView.origin.x, cellRectInSuperView.origin.y + 64, CGRectGetWidth(cellRectInSuperView), CGRectGetHeight(cellRectInSuperView));
+                             
+                         }
+                         completion:^(BOOL finished) {
+                             
+                             [self.screenButton setImage:[UIImage imageNamed:@"screen"] forState:UIControlStateNormal];
+                             self.isFullScreen = NO;
+                             self.removeViewBlock();
+                             [self clearAll];
+                             
+                         }];
+    }];
+
+}
+
+- (void)scaleThePlayer {
+
+    [self.pangestureView removeFromSuperview];
+    self.pangestureView = nil;
     
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         [self setTransform:CGAffineTransformIdentity];
-                         self.frame = self.beforeFrame;
-                     }
-                     completion:^(BOOL finished) {
-                         [self.screenButton setImage:[UIImage imageNamed:@"screen"] forState:UIControlStateNormal];
-                         self.isFullScreen = NO;
-                     }];
+    [self.vvideoBackgroundController dismissViewControllerAnimated:NO completion:^{
+        
+        CGAffineTransform form = CGAffineTransformMakeRotation(M_PI / 2.0);
+        [self setTransform:form];
+        self.frame = [[UIScreen mainScreen] bounds];
+        [self.superViewController.view addSubview:self];
+        
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             
+                             // 由于再放大的时候，进行了一个旋转，所以这里需要还原视图，还需要再次旋转
+                             CGAffineTransform form = CGAffineTransformIdentity;
+                             [self setTransform:form];
+                             CGRect cellRectInSuperView = self.returnCellRectInSuperView();
+                             self.frame = CGRectMake(cellRectInSuperView.origin.x, cellRectInSuperView.origin.y + 64, CGRectGetWidth(cellRectInSuperView), CGRectGetHeight(cellRectInSuperView));
+                             
+                         }
+                         completion:^(BOOL finished) {
+                             
+                             [self.screenButton setImage:[UIImage imageNamed:@"screen"] forState:UIControlStateNormal];
+                             self.isFullScreen = NO;
+                             [self setTransform:CGAffineTransformIdentity];
+                             self.frame = self.beforeFrame;
+                             self.willUnFullScreenBlock();
+                             
+                         }];
+        
+    }];
     
 }
 
@@ -736,6 +828,8 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     self.countSliderFloat = 0;
     self.videoTotalTime = 0;
     self.beforeFrame = CGRectZero;
+    self.superViewController = nil;
+    self.vvideoBackgroundController = nil;
 
 }
 

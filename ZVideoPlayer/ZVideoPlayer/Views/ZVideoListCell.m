@@ -30,6 +30,8 @@
 
     [super loadViews];
     
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     self.bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.bgImageView.userInteractionEnabled = YES;
     [self.contentView addSubview:self.bgImageView];
@@ -79,6 +81,8 @@
     player.removeViewBlock = ^{
         
         self.bgImageView.hidden = NO;
+        self.bgImageView.alpha = 1;
+        [strongPlayer removeFromSuperview];
         [UIView animateWithDuration:0.25
                          animations:^{
                              self.bgImageView.alpha = 1;
@@ -101,13 +105,14 @@
     player.willFullScreenBlock = ^{
         [self closePlayer];
     };
-    player.bgView = self.bgView;
+
     [player showViewIn:self animation:YES];
     player.isPlay = YES;
     self.bgImageView.hidden = YES;
     self.bgImageView.alpha = 0;
     
     player.superViewController = self.superViewController;
+    player.returnCellRectInSuperView = self.returnCellRectInSuperView;
     
 }
 
@@ -123,6 +128,20 @@
     self.bgImageView.hidden = YES;
     self.bgImageView.alpha = 0;
 
+}
+
+- (void)scrollClosePlayer {
+
+    if(self.bgImageView.hidden == YES) {
+    
+        [self closePlayer];
+        
+        ZSinglePlayerX *player = [ZSinglePlayerX shareInstance];
+        [player setIsPlay:NO];
+        [player closePlayer];
+    
+    }
+    
 }
 
 @end

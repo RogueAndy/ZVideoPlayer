@@ -109,9 +109,6 @@ typedef NS_ENUM(NSInteger, ZVPanControlVideo) {
 - (void)panGesture:(UIPanGestureRecognizer *)gesture {
 
     CGPoint panStartPoint = [gesture translationInView:self];
-//    NSLog(@"   %@",  [NSValue valueWithCGPoint:panStartPoint]);
-//
-//    return;
 
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:

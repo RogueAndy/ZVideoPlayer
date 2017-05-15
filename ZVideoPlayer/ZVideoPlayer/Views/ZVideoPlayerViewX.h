@@ -13,11 +13,30 @@
 /**
  关闭视图层索要执行的时间(execute method when close ZVideoPlayerView, you could set some animation to close ZVideoPlayerView and need to removeFromSuperview(), superView.ZVideoPlayerView = nil)
  */
-@property (nonatomic, strong) void (^removeViewBlock)(void);
-@property (nonatomic, strong) void (^willFullScreenBlock)(void);
-@property (nonatomic, strong) void (^willUnFullScreenBlock)(void);
-@property (nonatomic, strong) UIView *bgView;
 
+/**
+ 如果在视频专栏， 获取当前 cell 在控制器上的转换坐标，用于实现动画定位效果
+ */
+@property (nonatomic, strong) CGRect (^returnCellRectInSuperView)(void);
+
+/**
+ 删除播放器之后执行
+ */
+@property (nonatomic, strong) void (^removeViewBlock)(void);
+
+/**
+ 将会全屏时执行
+ */
+@property (nonatomic, strong) void (^willFullScreenBlock)(void);
+
+/**
+ 将会缩小屏幕时执行
+ */
+@property (nonatomic, strong) void (^willUnFullScreenBlock)(void);
+
+/**
+ 父控制器
+ */
 @property (nonatomic, strong) UIViewController *superViewController;
 
 /**

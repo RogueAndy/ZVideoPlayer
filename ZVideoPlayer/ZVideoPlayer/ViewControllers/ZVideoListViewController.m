@@ -82,13 +82,24 @@
         
         }
         weakSelf.whichCellIsPlayVideo = index;
-        NSLog(@"%ld", (long)weakSelf.whichCellIsPlayVideo);
+
     }];
 
+    cell.returnCellRectInSuperView = ^CGRect{
+        return [weakSelf countCellRectConvertIntoViewControllerRect:weakSelf.table cellForIndex:indexPath];
+    };
     cell.superViewController = self.navigationController;
-    cell.bgView = self.navigationController.view;
+    [cell scrollClosePlayer];
     
     return cell;
+
+}
+
+#pragma mark - 转换 cell 的位置到当前控制器 view 的坐标系
+- (CGRect)countCellRectConvertIntoViewControllerRect:(UITableView *)tableView cellForIndex:(NSIndexPath *)indexPath  {
+
+    CGRect cellFrame = [tableView rectForRowAtIndexPath:indexPath];
+    return [tableView convertRect:cellFrame toView:self.view];
 
 }
 

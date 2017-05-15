@@ -29,19 +29,19 @@
 
 - (void)loadInit {
 
-    NSLog(@"-------------------- start loadInit Method\n\n");
+//    NSLog(@"-------------------- start loadInit Method\n\n");
     
 }
 
 - (void)loadViews {
 
-    NSLog(@"-------------------- start loadViews Method\n\n");
+//    NSLog(@"-------------------- start loadViews Method\n\n");
 
 }
 
 - (void)loadLayout {
 
-    NSLog(@"-------------------- start loadLayout Method\n\n");
+//    NSLog(@"-------------------- start loadLayout Method\n\n");
 
 }
 

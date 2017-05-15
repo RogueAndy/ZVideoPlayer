@@ -85,8 +85,10 @@
 
 - (void)dealloc {
 
+    [self.imageViewC removeFromSuperview];
+    self.imageViewC = nil;
     self.image = nil;
-    NSLog(@"------------------ %@", [self class]);
+    NSLog(@"------------------ %@ has dealloc!!!", [self class]);
 
 }
 
