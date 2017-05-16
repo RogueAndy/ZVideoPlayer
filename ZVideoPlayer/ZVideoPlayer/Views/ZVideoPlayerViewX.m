@@ -497,6 +497,9 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     if(self.countSliderFloat > self.videoTotalTime) {
         
         [self.sliderTimer invalidate];
+        
+        // 在自动播放完毕的时候，需要缩小屏幕，自动关闭播放界面
+        [self closePlayer];
         return;
         
     }
