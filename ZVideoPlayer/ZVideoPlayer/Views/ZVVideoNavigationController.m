@@ -40,4 +40,10 @@
     
 }
 
+- (void)dealloc {
+
+    NSLog(@"---------------- %@ has dealloc!!!", [self class]);
+
+}
+
 @end

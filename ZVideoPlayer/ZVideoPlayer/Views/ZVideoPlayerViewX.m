@@ -621,15 +621,6 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     self.vvideoBackgroundController = [ZVVideoBackgroundController initWithBackgroundImage:[RgScreenShot imageWithViewController:self.superViewController]];
     self.vvideoNavigationController = [[ZVVideoNavigationController alloc] initWithRootViewController:self.vvideoBackgroundController];
     
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        UIImage *image = [RgScreenShot imageWithViewController:self.superViewController];
-//        self.vvideoBackgroundController = [[ZVVideoBackgroundController alloc] init];
-//        self.vvideoBackgroundController.image = image;
-//    });
-    
-//    NSLog(@"当前的线程 %@", [NSThread currentThread]);
-//    [self.superViewController presentViewController:cus animated:NO completion:nil];
-//    return;
     [self.superViewController presentViewController:self.vvideoNavigationController animated:NO completion:^{
        
         self.beforeFrame = self.frame;
@@ -646,7 +637,6 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
 //        [self setTransform:form];
 //        
         CGRect cellRectInSuperView = self.returnCellRectInSuperView();
-//        self.frame = CGRectMake(cellRectInSuperView.origin.y + 64, cellRectInSuperView.origin.x, CGRectGetHeight(cellRectInSuperView), CGRectGetWidth(cellRectInSuperView));
         self.frame = CGRectMake(cellRectInSuperView.origin.x, cellRectInSuperView.origin.y + 64, cellRectInSuperView.size.width, cellRectInSuperView.size.height);
 
         [UIView animateWithDuration:0.25

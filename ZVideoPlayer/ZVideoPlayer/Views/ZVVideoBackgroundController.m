@@ -35,10 +35,6 @@
     [self.view addGestureRecognizer:tap];
     
     self.imageViewC = [[UIImageView alloc] init];
-//    CGAffineTransform left = CGAffineTransformMakeRotation(M_PI * 1.5);
-//    [self.imageViewC setTransform:left];
-//    NSLog(@"%@", [NSValue valueWithCGRect:[[UIScreen mainScreen] bounds]]);
-//    self.imageViewC.frame = CGRectMake(0, 0, CGRectGetHeight([[UIScreen mainScreen] bounds]), CGRectGetWidth([[UIScreen mainScreen] bounds]));
     self.imageViewC.frame = [[UIScreen mainScreen] bounds];
     self.imageViewC.image = self.image;
     [self.view addSubview:self.imageViewC];
