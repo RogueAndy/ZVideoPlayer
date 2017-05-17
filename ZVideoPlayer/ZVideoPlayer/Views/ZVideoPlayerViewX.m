@@ -634,22 +634,22 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
         self.pangestureView.isLoadGesture = YES;
         [self.pangestureView addSubview:self];
         
-//        // 由于在进入 ZVVideoBackgroundController 会使手机进入横屏状态，所以坐标轴反转
-//        CGAffineTransform form = CGAffineTransformMakeRotation(-M_PI / 2.0);
-//        [self setTransform:form];
-//        
+        // 由于在进入 ZVVideoBackgroundController 会使手机进入横屏状态，所以坐标轴反转
+        CGAffineTransform form = CGAffineTransformMakeRotation(-M_PI * 0.5);
+        [self setTransform:form];
+
         CGRect cellRectInSuperView = self.returnCellRectInSuperView();
-        self.frame = CGRectMake(cellRectInSuperView.origin.x, cellRectInSuperView.origin.y + 64, cellRectInSuperView.size.width, cellRectInSuperView.size.height);
+        self.frame = CGRectMake( cellRectInSuperView.origin.y + 64, cellRectInSuperView.origin.x, cellRectInSuperView.size.height, cellRectInSuperView.size.width);
 
         [UIView animateWithDuration:0.25
                          animations:^{
-                             CGAffineTransform form = CGAffineTransformMakeRotation(M_PI / 2.0);
-                             [self setTransform:form];
+                             [self setTransform:CGAffineTransformIdentity];
                              self.frame = [[UIScreen mainScreen] bounds];
                          }
                          completion:^(BOOL finished) {
                              [self.screenButton setImage:[UIImage imageNamed:@"scale"] forState:UIControlStateNormal];
                              self.isFullScreen = YES;
+                             [self setTransform:CGAffineTransformIdentity];
                          }];
         
     }];
@@ -682,7 +682,7 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     [self.pangestureView removeFromSuperview];
     self.pangestureView = nil;
     [self.vvideoNavigationController dismissViewControllerAnimated:NO completion:^{
-        CGAffineTransform form = CGAffineTransformMakeRotation(M_PI / 2.0);
+        CGAffineTransform form = CGAffineTransformMakeRotation(M_PI * 0.5);
         [self setTransform:form];
         self.frame = [[UIScreen mainScreen] bounds];
         [self.superViewController.view addSubview:self];
@@ -719,7 +719,7 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     
     [self.vvideoBackgroundController dismissViewControllerAnimated:NO completion:^{
         
-        CGAffineTransform form = CGAffineTransformMakeRotation(M_PI / 2.0);
+        CGAffineTransform form = CGAffineTransformMakeRotation(M_PI * 0.5);
         [self setTransform:form];
         self.frame = [[UIScreen mainScreen] bounds];
         [self.superViewController.view addSubview:self];

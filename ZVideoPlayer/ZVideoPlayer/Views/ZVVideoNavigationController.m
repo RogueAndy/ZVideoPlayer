@@ -40,6 +40,12 @@
     
 }
 
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    
+    return  [self.topViewController preferredInterfaceOrientationForPresentation];
+    
+}
+
 - (void)dealloc {
 
     NSLog(@"---------------- %@ has dealloc!!!", [self class]);
