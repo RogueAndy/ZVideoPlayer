@@ -373,7 +373,6 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     
     self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - blackViewHeight, CGRectGetWidth(self.bounds), blackViewHeight);
     self.slider.frame = CGRectMake(60, 10, CGRectGetWidth(self.bounds) - 160, CGRectGetHeight(self.bottomView.bounds) - 20);
-    
     self.currentTimeLabel.frame = CGRectMake(10, self.slider.frame.origin.y, 45, self.slider.frame.size.height);
     self.totalTimeLabel.frame = CGRectMake(self.slider.frame.origin.x + self.slider.frame.size.width + 5, self.slider.frame.origin.y, 45, self.slider.frame.size.height);
     
@@ -403,7 +402,7 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
     self.playLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     [self.layer addSublayer:self.playLayer];
-    
+
 }
 
 #pragma mark - 本地视频生成代码
