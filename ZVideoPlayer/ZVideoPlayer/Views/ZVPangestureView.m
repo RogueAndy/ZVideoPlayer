@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, ZVPanControlVideo) {
         {
         
             self.isBeginTouch = YES;
-            self.lightOrVlolume = CGRectGetHeight([[UIScreen mainScreen] bounds]) / 2.0 > self.recordTouchLocationInView.x ? ZVPanLight : ZVPanVolume;
+            self.lightOrVlolume = CGRectGetWidth([[UIScreen mainScreen] bounds]) / 2.0 > self.recordTouchLocationInView.x ? ZVPanLight : ZVPanVolume;
         
         }
             break;
@@ -127,13 +127,13 @@ typedef NS_ENUM(NSInteger, ZVPanControlVideo) {
                 case ZVPanLight:
                 {
                 
-                    if(panStartPoint.x < 0) {
+                    if(panStartPoint.y < 0) {
                     
-                        [[UIScreen mainScreen] setBrightness:self.startLight + (panStartPoint.x / 30.0 / 10)];
+                        [[UIScreen mainScreen] setBrightness:self.startLight + (-panStartPoint.y / 30.0 / 10)];
                     
                     } else {
                     
-                        [[UIScreen mainScreen] setBrightness:self.startLight - (-panStartPoint.x / 30.0 / 10)];
+                        [[UIScreen mainScreen] setBrightness:self.startLight - (panStartPoint.y / 30.0 / 10)];
                     
                     }
                     
@@ -144,13 +144,13 @@ typedef NS_ENUM(NSInteger, ZVPanControlVideo) {
                 case ZVPanVolume:
                 {
                 
-                    if (panStartPoint.x < 0) {
+                    if (panStartPoint.y < 0) {
                         
-                        [self.volumeViewSlider setValue:self.startVolume + (panStartPoint.x / 100.0 / 10) animated:YES];
+                        [self.volumeViewSlider setValue:self.startVolume + (-panStartPoint.y / 100.0 / 10) animated:YES];
 
                     } else {
                         
-                        [self.volumeViewSlider setValue:self.startVolume - (-panStartPoint.x / 100.0 / 10) animated:YES];
+                        [self.volumeViewSlider setValue:self.startVolume - (panStartPoint.y / 100.0 / 10) animated:YES];
                     
                     }
                     
