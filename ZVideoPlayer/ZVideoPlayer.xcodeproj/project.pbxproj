@@ -17,6 +17,11 @@
 		8244A73A1EC55AEB0009725C /* ZVPangestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A7391EC55AEB0009725C /* ZVPangestureView.m */; };
 		8244A73D1EC59C870009725C /* ZVVideoBackgroundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A73C1EC59C870009725C /* ZVVideoBackgroundController.m */; };
 		8244A7401EC5A4330009725C /* RgScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8244A73F1EC5A4330009725C /* RgScreenShot.m */; };
+		82C899131ED80BE600959F46 /* ZAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C899121ED80BE600959F46 /* ZAssetViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		82C899161ED8173700959F46 /* ZURLAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C899151ED8173700959F46 /* ZURLAssetViewController.m */; };
+		82C899191ED90AA000959F46 /* ZURLAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C899181ED90AA000959F46 /* ZURLAssetCell.m */; };
+		82C8991C1ED9101900959F46 /* ZButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8991B1ED9101900959F46 /* ZButton.m */; };
+		82CB902E1EE5583A00880C9C /* JPVideoPlayerResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 82CB902D1EE5583A00880C9C /* JPVideoPlayerResourceLoader.m */; };
 		A9EE7BC43DFCBE23CF2F2561 /* libPods-ZVideoPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C0E9F9679B2EDB510E6E84 /* libPods-ZVideoPlayer.a */; };
 		ABE1F2A91E14B243004A6E16 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2A81E14B243004A6E16 /* main.m */; };
 		ABE1F2AC1E14B243004A6E16 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1F2AB1E14B243004A6E16 /* AppDelegate.m */; };
@@ -56,6 +61,16 @@
 		8244A73C1EC59C870009725C /* ZVVideoBackgroundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZVVideoBackgroundController.m; sourceTree = "<group>"; };
 		8244A73E1EC5A4330009725C /* RgScreenShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RgScreenShot.h; sourceTree = "<group>"; };
 		8244A73F1EC5A4330009725C /* RgScreenShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RgScreenShot.m; sourceTree = "<group>"; };
+		82C899111ED80BE600959F46 /* ZAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAssetViewController.h; sourceTree = "<group>"; };
+		82C899121ED80BE600959F46 /* ZAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAssetViewController.m; sourceTree = "<group>"; };
+		82C899141ED8173700959F46 /* ZURLAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZURLAssetViewController.h; sourceTree = "<group>"; };
+		82C899151ED8173700959F46 /* ZURLAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZURLAssetViewController.m; sourceTree = "<group>"; };
+		82C899171ED90AA000959F46 /* ZURLAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZURLAssetCell.h; sourceTree = "<group>"; };
+		82C899181ED90AA000959F46 /* ZURLAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZURLAssetCell.m; sourceTree = "<group>"; };
+		82C8991A1ED9101900959F46 /* ZButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZButton.h; sourceTree = "<group>"; };
+		82C8991B1ED9101900959F46 /* ZButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZButton.m; sourceTree = "<group>"; };
+		82CB902C1EE5583A00880C9C /* JPVideoPlayerResourceLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPVideoPlayerResourceLoader.h; sourceTree = "<group>"; };
+		82CB902D1EE5583A00880C9C /* JPVideoPlayerResourceLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPVideoPlayerResourceLoader.m; sourceTree = "<group>"; };
 		ABE1F2A41E14B243004A6E16 /* ZVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABE1F2A81E14B243004A6E16 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ABE1F2AA1E14B243004A6E16 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -166,6 +181,10 @@
 				8244A7271EC4278C0009725C /* ZVideoListViewController.m */,
 				8244A7321EC42E130009725C /* ZVideoPlayerViewControllerX.h */,
 				8244A7331EC42E130009725C /* ZVideoPlayerViewControllerX.m */,
+				82C899111ED80BE600959F46 /* ZAssetViewController.h */,
+				82C899121ED80BE600959F46 /* ZAssetViewController.m */,
+				82C899141ED8173700959F46 /* ZURLAssetViewController.h */,
+				82C899151ED8173700959F46 /* ZURLAssetViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -192,6 +211,10 @@
 				8244A73C1EC59C870009725C /* ZVVideoBackgroundController.m */,
 				823FC08D1EC9AD22006A4D02 /* ZVVideoNavigationController.h */,
 				823FC08E1EC9AD22006A4D02 /* ZVVideoNavigationController.m */,
+				82C899171ED90AA000959F46 /* ZURLAssetCell.h */,
+				82C899181ED90AA000959F46 /* ZURLAssetCell.m */,
+				82C8991A1ED9101900959F46 /* ZButton.h */,
+				82C8991B1ED9101900959F46 /* ZButton.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -208,6 +231,8 @@
 		ABE1F2C71E14B2E1004A6E16 /* BaseViews */ = {
 			isa = PBXGroup;
 			children = (
+				82CB902C1EE5583A00880C9C /* JPVideoPlayerResourceLoader.h */,
+				82CB902D1EE5583A00880C9C /* JPVideoPlayerResourceLoader.m */,
 				ABE1F2C81E14B2E1004A6E16 /* ZBaseTableViewCell.h */,
 				ABE1F2C91E14B2E1004A6E16 /* ZBaseTableViewCell.m */,
 				ABE1F2CA1E14B2E1004A6E16 /* ZBaseView.h */,
@@ -351,7 +376,9 @@
 			files = (
 				8244A72B1EC428710009725C /* ZVideoListCell.m in Sources */,
 				ABE1F2CD1E14B2E1004A6E16 /* ZBaseView.m in Sources */,
+				82C899131ED80BE600959F46 /* ZAssetViewController.m in Sources */,
 				823FC08F1EC9AD22006A4D02 /* ZVVideoNavigationController.m in Sources */,
+				82C899161ED8173700959F46 /* ZURLAssetViewController.m in Sources */,
 				8244A7311EC42BB70009725C /* ZVideoControlButton.m in Sources */,
 				8244A73D1EC59C870009725C /* ZVVideoBackgroundController.m in Sources */,
 				8244A73A1EC55AEB0009725C /* ZVPangestureView.m in Sources */,
@@ -359,7 +386,10 @@
 				8244A7371EC44E4E0009725C /* ZSinglePlayerX.m in Sources */,
 				ABE1F2D01E14B30D004A6E16 /* ZVideoPlayerController.m in Sources */,
 				8244A7341EC42E130009725C /* ZVideoPlayerViewControllerX.m in Sources */,
+				82C8991C1ED9101900959F46 /* ZButton.m in Sources */,
+				82C899191ED90AA000959F46 /* ZURLAssetCell.m in Sources */,
 				ABE1F2AF1E14B243004A6E16 /* ViewController.m in Sources */,
+				82CB902E1EE5583A00880C9C /* JPVideoPlayerResourceLoader.m in Sources */,
 				ABE1F2CC1E14B2E1004A6E16 /* ZBaseTableViewCell.m in Sources */,
 				ABE1F2AC1E14B243004A6E16 /* AppDelegate.m in Sources */,
 				ABE1F2D31E14B322004A6E16 /* ZVideoPlayerView.m in Sources */,

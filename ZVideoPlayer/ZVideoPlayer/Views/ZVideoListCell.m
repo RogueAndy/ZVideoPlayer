@@ -101,7 +101,7 @@
     [player showViewIn:self animation:YES animationComplete:^{
         [weakSelf showPlayer]; //隐藏 cell上的默认背景图
     }]; // 添加视频
-    player.isPlay = YES; // 开始播放
+//    player.isPlay = YES; // 开始播放
     
 }
 

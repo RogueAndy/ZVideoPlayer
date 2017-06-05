@@ -16,6 +16,7 @@
 #import "RgScreenShot.h"
 #import "ZVVideoBackgroundController.h"
 #import "ZVVideoNavigationController.h"
+#import "JPVideoPlayerResourceLoader.h"
 
 @interface ZVTimeTransform : NSObject
 
@@ -166,6 +167,8 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
 @property (nonatomic, strong) ZVVideoBackgroundController *vvideoBackgroundController;
 
 @property (nonatomic, strong) ZVVideoNavigationController *vvideoNavigationController;
+
+@property (nonatomic, strong) AVURLAsset *videoUrlAsset;
 
 @end
 
@@ -332,7 +335,9 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     
     self.slider = [[UISlider alloc] initWithFrame:CGRectZero];
     [self.slider setThumbImage:[UIImage imageNamed:@"movepoint"] forState:UIControlStateNormal];
+    NSLog(@"jjjjjjjjjjjjjjjjjj");
     self.videoTotalTime = CMTimeGetSeconds(self.playerItem.asset.duration);
+    NSLog(@"kkkkkkkkkkkkkkkkkk");
     self.slider.maximumValue = self.videoTotalTime;
     self.slider.continuous = YES;
     [self.slider addTarget:self action:@selector(sliderBegan:) forControlEvents:UIControlEventTouchDown];
@@ -398,10 +403,35 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
 
 - (void)loadOnlineVideo {
     
-    self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:self.urlString]];
+    NSURL *videoPathURL = [NSURL URLWithString:self.urlString];
+    NSLog(@"1111111111111111");
+    self.videoUrlAsset = [AVURLAsset URLAssetWithURL:videoPathURL options:nil];
+    NSLog(@"2222222222222222");
+    JPVideoPlayerResourceLoader *resourceLoader = [JPVideoPlayerResourceLoader new];
+    [self.videoUrlAsset.resourceLoader setDelegate:resourceLoader queue:dispatch_get_main_queue()];
+    self.playerItem = [AVPlayerItem playerItemWithAsset:self.videoUrlAsset];
+    NSLog(@"3333333333333333");
+    
+    
+    [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+    [self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+    
+//    self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:self.urlString]];
     self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+    NSLog(@"4444444444444444");
     self.playLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    NSLog(@"5555555555555555");
     [self.layer addSublayer:self.playLayer];
+    NSLog(@"6666666666666666");
+    
+    [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1.0, 2.0) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+//        NSLog(@"------- %f", CMTimeGetSeconds(time));
+    }];
+    
+    
+    [self.player play];
+    
+    NSLog(@"9999999999999999");
 
 }
 
@@ -607,7 +637,9 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
 - (void)afterPlay {
 
     self.videoControlButton.isplayer = YES;
+    NSLog(@"777777777777777");
     [self.player play];
+    NSLog(@"888888888888888");
     self.sliderTimer = [NSTimer scheduledTimerWithTimeInterval:zvideo_timer_move_distanceX target:self selector:@selector(countSlider:) userInfo:nil repeats:YES];
     [self.videoControlButton setImage:[[UIImage imageNamed:@"pause"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     
@@ -799,6 +831,14 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
  */
 - (void)clearAll {
 
+    [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    [self.playerItem removeObserver:self forKeyPath:@"status"];
+    
+    [self.player pause];
+    [self.player cancelPendingPrerolls];
+    self.player = nil;
+    [self.videoUrlAsset.resourceLoader setDelegate:nil queue:dispatch_get_main_queue()];
+    
     [self.closeButton removeFromSuperview];
     [self.currentTimeLabel removeFromSuperview];
     [self.totalTimeLabel removeFromSuperview];
@@ -832,6 +872,22 @@ static CGFloat zvideo_timer_move_distanceX = 0.5;
     self.vvideoBackgroundController = nil;
     self.vvideoNavigationController = nil;
 
+}
+
+#pragma mark - KVC
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+
+    if([keyPath isEqualToString:@"loadedTimeRanges"]) {
+    
+//        NSLog(@"dwadaw");
+    
+    } else if([keyPath isEqualToString:@"status"])
+    {
+    
+//        NSLog(@"----- 状态");
+    
+    }
 }
 
 @end

@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "ZVideoPlayerController.h"
 #import "ZVideoPlayerViewControllerX.h"
+#import "ZAssetViewController.h"
+#import "ZURLAssetViewController.h"
 
 @interface AppDelegate ()
 
